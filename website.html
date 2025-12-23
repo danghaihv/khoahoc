@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Giảng Khóa Học</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 5px 10px;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Courses Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-content h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .course-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .course-meta span {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: fadeInDown 0.5s;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                📚 BÀI GIẢNG KHÓA HỌC
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Trang Chủ</a></li>
+                    <li><a href="#courses">Khóa Học</a></li>
+                    <li><a href="#about">Giới Thiệu</a></li>
+                    <li><a href="#contact">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Học Tập Không Giới Hạn</h1>
+        <p>Khám phá hàng trăm khóa học chất lượng cao từ các giảng viên hàng đầu</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm khóa học...">
+            <button onclick="searchCourses()">Tìm kiếm</button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <div class="container">
+        <h2 class="section-title">Danh Mục Học Tập</h2>
+        <div class="categories">
+            <div class="category-card" onclick="filterCourses('all')">
+                <div class="category-icon">🎓</div>
+                <h3>Tất Cả</h3>
+                <p>Xem toàn bộ khóa học</p>
+            </div>
+            <div class="category-card" onclick="filterCourses('programming')">
+                <div class="category-icon">💻</div>
+                <h3>Lập Trình</h3>
+                <p>Python, JavaScript, Java...</p>
+            </div>
+            <div class="category-card" onclick="filterCourses('design')">
+                <div class="category-icon">🎨</div>
+                <h3>Thiết Kế</h3>
+                <p>UI/UX, Graphic Design...</p>
+            </div>
+            <div class="category-card" onclick="filterCourses('business')">
+                <div class="category-icon">💼</div>
+                <h3>Kinh Doanh</h3>
+                <p>Marketing, Quản Trị...</p>
+            </div>
+        </div>
+
+        <!-- Courses -->
+        <h2 class="section-title" id="courses">Khóa Học Nổi Bật</h2>
+        <div class="courses" id="coursesList">
+            <!-- Course 1 -->
+            <div class="course-card" data-category="programming">
+                <div class="course-image">💻</div>
+                <div class="course-content">
+                    <h3>Lập Trình Python Từ Cơ Bản Đến Nâng Cao</h3>
+                    <p>Học Python từ con số 0, phù hợp cho người mới bắt đầu với nhiều dự án thực tế</p>
+                    <div class="course-meta">
+                        <span>⭐ 4.8 (2,345 đánh giá)</span>
+                        <button class="btn" onclick="showCourseDetail('Python')">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="course-card" data-category="design">
+                <div class="course-image">🎨</div>
+                <div class="course-content">
+                    <h3>Thiết Kế UI/UX Chuyên Nghiệp</h3>
+                    <p>Nắm vững các nguyên lý thiết kế giao diện và trải nghiệm người dùng hiện đại</p>
+                    <div class="course-meta">
+                        <span>⭐ 4.9 (1,876 đánh giá)</span>
+                        <button class="btn" onclick="showCourseDetail('UI/UX')">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="course-card" data-category="business">
+                <div class="course-image">💼</div>
+                <div class="course-content">
+                    <h3>Digital Marketing Toàn Diện</h3>
+                    <p>Chiến lược Marketing online hiệu quả cho doanh nghiệp và cá nhân</p>
+                    <div class="course-meta">
+                        <span>⭐ 4.7 (1,542 đánh giá)</span>
+                        <button class="btn" onclick="showCourseDetail('Marketing')">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="course-card" data-category="programming">
+                <div class="course-image">🌐</div>
+                <div class="course-content">
+                    <h3>Phát Triển Web Full-Stack</h3>
+                    <p>Xây dựng website hoàn chỉnh với HTML, CSS, JavaScript và Node.js</p>
+                    <div class="course-meta">
+                        <span>⭐ 4.8 (2,103 đánh giá)</span>
+                        <button class="btn" onclick="showCourseDetail('Web')">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="course-card" data-category="design">
+                <div class="course-image">📱</div>
+                <div class="course-content">
+                    <h3>Thiết Kế App Mobile</h3>
+                    <p>Tạo giao diện ứng dụng di động đẹp mắt và dễ sử dụng</p>
+                    <div class="course-meta">
+                        <span>⭐ 4.6 (987 đánh giá)</span>
+                        <button class="btn" onclick="showCourseDetail('Mobile')">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="course-card" data-category="business">
+                <div class="course-image">📊</div>
+                <div class="course-content">
+                    <h3>Phân Tích Dữ Liệu với Excel</h3>
+                    <p>Làm chủ Excel để phân tích và trực quan hóa dữ liệu doanh nghiệp</p>
+                    <div class="course-meta">
+                        <span>⭐ 4.7 (1,654 đánh giá)</span>
+                        <button class="btn" onclick="showCourseDetail('Excel')">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Về Chúng Tôi</h3>
+                <p>Nền tảng học trực tuyến hàng đầu Việt Nam với hàng nghìn khóa học chất lượng cao.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Danh Mục</h3>
+                <ul>
+                    <li><a href="#">Lập Trình</a></li>
+                    <li><a href="#">Thiết Kế</a></li>
+                    <li><a href="#">Kinh Doanh</a></li>
+                    <li><a href="#">Ngoại Ngữ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3>
+                <ul>
+                    <li><a href="#">Câu Hỏi Thường Gặp</a></li>
+                    <li><a href="#">Chính Sách</a></li>
+                    <li><a href="#">Điều Khoản</a></li>
+                    <li><a href="#">Liên Hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kết Nối</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bài Giảng Khóa Học. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        function searchCourses() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const courses = document.querySelectorAll('.course-card');
+            
+            courses.forEach(course => {
+                const title = course.querySelector('h3').textContent.toLowerCase();
+                const description = course.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    course.style.display = 'block';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter by category
+        function filterCourses(category) {
+            const courses = document.querySelectorAll('.course-card');
+            
+            courses.forEach(course => {
+                if (category === 'all' || course.dataset.category === category) {
+                    course.style.display = 'block';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+        }
+
+        // Show course detail modal
+        function showCourseDetail(courseName) {
+            const modal = document.getElementById('courseModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            const courseDetails = {
+                'Python': {
+                    title: 'Lập Trình Python Từ Cơ Bản Đến Nâng Cao',
+                    description: 'Khóa học Python toàn diện dành cho người mới bắt đầu',
+                    duration: '40 giờ',
+                    lessons: '120 bài học',
+                    level: 'Cơ bản đến Nâng cao',
+                    content: ['Cú pháp Python cơ bản', 'Lập trình hướng đối tượng', 'Xử lý dữ liệu', 'Dự án thực tế']
+                },
+                'UI/UX': {
+                    title: 'Thiết Kế UI/UX Chuyên Nghiệp',
+                    description: 'Học thiết kế giao diện và trải nghiệm người dùng',
+                    duration: '35 giờ',
+                    lessons: '95 bài học',
+                    level: 'Trung cấp',
+                    content: ['Nguyên lý thiết kế', 'Figma & Adobe XD', 'User Research', 'Portfolio dự án']
+                },
+                'Marketing': {
+                    title: 'Digital Marketing Toàn Diện',
+                    description: 'Chiến lược Marketing online hiệu quả',
+                    duration: '30 giờ',
+                    lessons: '85 bài học',
+                    level: 'Cơ bản đến Trung cấp',
+                    content: ['SEO & SEM', 'Social Media Marketing', 'Email Marketing', 'Analytics & ROI']
+                },
+                'Web': {
+                    title: 'Phát Triển Web Full-Stack',
+                    description: 'Xây dựng website hoàn chỉnh từ A-Z',
+                    duration: '50 giờ',
+                    lessons: '150 bài học',
+                    level: 'Cơ bản đến Nâng cao',
+                    content: ['HTML, CSS, JavaScript', 'React & Node.js', 'Database', 'Deploy ứng dụng']
+                },
+                'Mobile': {
+                    title: 'Thiết Kế App Mobile',
+                    description: 'Tạo giao diện ứng dụng di động đẹp mắt',
+                    duration: '28 giờ',
+                    lessons: '75 bài học',
+                    level: 'Trung cấp',
+                    content: ['Mobile Design Principles', 'iOS & Android Guidelines', 'Prototyping', 'User Testing']
+                },
+                'Excel': {
+                    title: 'Phân Tích Dữ Liệu với Excel',
+                    description: 'Làm chủ Excel cho công việc',
+                    duration: '25 giờ',
+                    lessons: '70 bài học',
+                    level: 'Cơ bản đến Nâng cao',
+                    content: ['Functions & Formulas', 'Pivot Tables', 'Data Visualization', 'Macros & VBA']
+                }
+            };
+
+            const course = courseDetails[courseName];
+            
+            modalBody.innerHTML = `
+                <h2>${course.title}</h2>
+                <p style="color: #666; margin: 20px 0;">${course.description}</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <p><strong>⏱️ Thời lượng:</strong> ${course.duration}</p>
+                    <p><strong>📚 Số bài học:</strong> ${course.lessons}</p>
+                    <p><strong>📊 Trình độ:</strong> ${course.level}</p>
+                </div>
+                
+                <h3 style="margin: 30px 0 15px 0;">Nội dung khóa học:</h3>
+                <ul style="list-style: none; padding: 0;">
+                    ${course.content.map(item => `<li style="padding: 10px 0; border-bottom: 1px solid #eee;">✓ ${item}</li>`).join('')}
+                </ul>
+                
+                <button class="btn" style="width: 100%; margin-top: 30px; padding: 15px; font-size: 1.1rem;">
+                    Đăng Ký Ngay
+                </button>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('courseModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('courseModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchCourses();
+            }
+        });
+    </script>
+</body>
+</html>
